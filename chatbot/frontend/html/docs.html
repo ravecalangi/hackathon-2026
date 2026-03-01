@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Veritascan – Analysis Methodology</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=DM+Mono:ital,wght@0,400;0,500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../styles/styles.css">
+  <link rel="stylesheet" href="../styles/docs.css">
+</head>
+
+<body class="dark">
+
+  <!-- NAVBAR -->
+  <nav id="navbar">
+    <div class="container flex items-center justify-between">
+      <div class="nav-logo" style="display:flex;align-items:center;gap:7px;">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--primary)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="10" cy="10" r="6"/>
+          <path d="m21 21-4.35-4.35"/>
+          <path d="m7.5 10 2 2 3-3"/>
+        </svg>
+        <span id="web-name">Verita<span style="color:var(--primary);">scan</span></span>
+      </div>
+      <div class="nav-links md-flex hidden gap-4 items-center">
+        <a href="index.html">Home</a>
+        <a href="chatbot.html">Verify News</a>
+        <a href="imageDetector.html">AI Detector</a>
+        <a href="docs.html" id="docs">Docs</a>
+        <button id="theme-toggle">
+          <span class="toggle-thumb">
+            <svg class="toggle-icon toggle-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+            </svg>
+            <svg class="toggle-icon toggle-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+          </span>
+        </button>
+      </div>
+      <button class="md-hidden" style="color:var(--text-main);">
+        <svg viewBox="0 0 24 24"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="docs-hero">
+    <div class="container">
+
+      <h1 class="docs-hero-title">Analysis Methodology</h1>
+      <p class="docs-hero-sub">A transparent look at how Veritascan evaluates news credibility and detects AI-generated images using statistical methods and live AI model analysis.</p>
+
+    </div>
+  </div>
+
+  <!-- STICKY TAB BAR -->
+  <div class="docs-tab-wrap">
+    <div class="container">
+      <div class="docs-tab-bar">
+        <button class="tab-btn active" data-tab="news">
+          <svg viewBox="0 0 24 24"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg>
+          News Methodology
+        </button>
+        <button class="tab-btn" data-tab="image">
+          <svg viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+          Image Methodology
+        </button>
+        <button class="tab-btn" data-tab="engine">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          AI Engine
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTENT -->
+  <main id="methodology" class="docs-main">
+    <div class="container docs-layout">
+
+      <!-- PANEL: NEWS -->
+      <div id="panel-news" class="tab-panel active">
+
+        <div class="panel-intro">
+          <span class="panel-label">News Verification Engine</span>
+          <h2 class="panel-title">AI & Statistical News Evaluation Engine <span class="mono-tag">ASEE</span></h2>
+          <p class="panel-desc">ASEE evaluates news credibility using a multi-layer approach combining supervised machine learning, statistical distribution analysis, semantic embeddings, and live AI model reasoning. Every verdict is backed by data — not opinion.</p>
+        </div>
+
+        <!-- Step 1 -->
+        <div class="doc-card">
+          <div class="doc-card-head">
+            <span class="step-num">01</span>
+            <div>
+              <h3 class="doc-card-title">API Model Integration</h3>
+              <p class="doc-card-sub">Live LLM reasoning layer</p>
+            </div>
+          </div>
+          <div class="doc-card-body">
+            <p>Veritascan connects to the best available large language model in real time via OpenRouter. The <strong>primary model</strong> is <code>google/gemini-2.0-flash-exp</code>. If the primary model is unavailable or rate-limited, the system automatically cascades through a ranked list of fallback models.</p>
+
+            <div class="model-table">
+              <div class="model-row model-primary">
+                <div class="model-badge primary">Primary</div>
+                <code>google/gemini-2.0-flash-exp</code>
+              </div>
+              <div class="model-row">
+                <div class="model-badge fallback">Fallback 1</div>
+                <code>deepseek/deepseek-chat-v3-0324</code>
+              </div>
+              <div class="model-row">
+                <div class="model-badge fallback">Fallback 2</div>
+                <code>meta-llama/llama-4-maverick</code>
+              </div>
+              <div class="model-row">
+                <div class="model-badge fallback">Fallback 3</div>
+                <code>mistralai/mistral-small-3.1-24b</code>
+              </div>
+              <div class="model-row muted">
+                <div class="model-badge muted-badge">+7 more</div>
+                <span style="color:var(--text-muted);font-size:0.72rem;">deepseek-r1, llama-3.1, gpt-3.5-turbo, openrouter/auto…</span>
+              </div>
+            </div>
+
+            <p class="doc-highlight">The final verdict is produced by combining rigorous statistical signals with live AI reasoning — delivering the most robust fake-news detection possible.</p>
+
+            <div class="example-box">
+              <strong>Example</strong> — When statistical scores flag high risk, the AI model checks specific claims against live search evidence and refines the overall conclusion.
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="doc-card">
+          <div class="doc-card-head">
+            <span class="step-num">02</span>
+            <div>
+              <h3 class="doc-card-title">Probability Score Analysis</h3>
+              <p class="doc-card-sub">Supervised ML classification</p>
+            </div>
+          </div>
+          <div class="doc-card-body">
+            <p>Supervised machine learning models (Random Forest, Logistic Regression) trained on datasets like the Fake News Corpus (&gt;100,000 labeled articles) calculate the probability an article is fake. Key features include linguistic markers, sentence complexity (Flesch-Kincaid), word importance (TF-IDF), and syntactic structure (part-of-speech ratios).</p>
+
+            <div class="stat-row">
+              <div class="stat-card danger">
+                <div class="stat-num">94.3%</div>
+                <div class="stat-lbl">Fake Probability</div>
+              </div>
+              <div class="stat-card success">
+                <div class="stat-num">5.7%</div>
+                <div class="stat-lbl">Real Probability</div>
+              </div>
+            </div>
+
+            <div class="badge-pill success">Confidence Score: 0.943 (cross-validation accuracy ~92%)</div>
+            <p class="doc-note danger">This article is 16.5× more likely to be fake — well above the 0.85 high-risk threshold (determined via ROC analysis).</p>
+            <div class="example-box">
+              <strong>Example</strong> — Real (Reuters): "The economy grew by 2.3% last quarter." vs. Fake: "Shocking economic collapse imminent!" — emotional trigger words raise fake probability.
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="doc-card">
+          <div class="doc-card-head">
+            <span class="step-num">03</span>
+            <div>
+              <h3 class="doc-card-title">Emotional Language Statistical Deviation</h3>
+              <p class="doc-card-sub">VADER / TextBlob sentiment analysis</p>
+            </div>
+          </div>
+          <div class="doc-card-body">
+            <p>Fake news frequently relies on sensational, emotion-evoking language. Sentiment tools (VADER, TextBlob) calculate the proportion of emotionally charged words and compare it to real-news baselines (NYT archive: mean 12%, SD 5%).</p>
+
+            <div class="bar-group">
+              <div class="bar-row">
+                <span>Article emotional content ratio</span>
+                <span class="danger">38%</span>
+              </div>
+              <div class="progress-track"><div class="progress-fill danger" style="width:38%"></div></div>
+              <div class="bar-row" style="margin-top:0.5rem;">
+                <span>Average in verified real news</span>
+                <span class="success">12%</span>
+              </div>
+              <div class="progress-track"><div class="progress-fill success" style="width:12%"></div></div>
+            </div>
+
+            <div class="big-stat-card">
+              <div class="big-val warning">+216%</div>
+              <div class="big-sub">Deviation from expected mean · Z-score: 5.2</div>
+            </div>
+
+            <p class="doc-note warning">This level is &gt;3 standard deviations above normal — very rare in authentic reporting (p &lt; 0.001, ~2.1% of real articles per chi-squared test).</p>
+            <div class="example-box">
+              <strong>Example</strong> — Real: "The bill passed with 52 votes." vs. Fake: "Outrageous betrayal as corrupt politicians force disastrous bill!"
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="doc-card">
+          <div class="doc-card-head">
+            <span class="step-num">04</span>
+            <div>
+              <h3 class="doc-card-title">Pattern Similarity Score</h3>
+              <p class="doc-card-sub">BERT / Word2Vec cosine similarity</p>
+            </div>
+          </div>
+          <div class="doc-card-body">
+            <p>The article is transformed into semantic vectors (BERT / Word2Vec embeddings) and compared via cosine similarity to known fake (Kaggle Fake News Dataset) and real (Reuters) reference collections.</p>
+
+            <div class="bar-group">
+              <div class="bar-row"><span class="danger">Similarity to Fake News Dataset</span><span>92.4%</span></div>
+              <div class="progress-track"><div class="progress-fill danger" style="width:92.4%"></div></div>
+              <div class="bar-row" style="margin-top:0.5rem;"><span class="success">Similarity to Real News Dataset</span><span>7.6%</span></div>
+              <div class="progress-track"><div class="progress-fill success" style="width:7.6%"></div></div>
+            </div>
+
+            <p class="doc-note accent">The article aligns 12× more closely with fake-news patterns (t-test p &lt; 0.001).</p>
+            <div class="example-box">
+              <strong>Example</strong> — Fake: repetitive exclamations, unsupported claims. Real: balanced sourcing, neutral tone.
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 5 -->
+        <div class="doc-card">
+          <div class="doc-card-head">
+            <span class="step-num">05</span>
+            <div>
+              <h3 class="doc-card-title">Credibility Score</h3>
+              <p class="doc-card-sub">Composite 0–100 weighted formula</p>
+            </div>
+          </div>
+          <div class="doc-card-body">
+            <p>A composite 0–100 score is calculated using:</p>
+            <div class="formula-box">
+              <code>(FakeProb × 0.4) + (1 − NormEmotionalDev) × 0.2 + (RealPatternSim) × 0.2 + (NormDistributionZ) × 0.2</code>
+            </div>
+            <p style="margin-top:0.25rem;color:var(--text-muted);font-size:0.72rem;">Calibrated on &gt;50,000 articles.</p>
+
+            <div class="gauge-wrap">
+              <svg class="gauge-svg" viewBox="0 0 42 42">
+                <circle class="gauge-bg" cx="21" cy="21" r="15.915"/>
+                <circle class="gauge-fill danger-stroke" cx="21" cy="21" r="15.915" stroke-dasharray="18 82"/>
+              </svg>
+              <div class="gauge-inner">
+                <div class="gauge-num">18</div>
+                <div class="gauge-denom">/ 100</div>
+              </div>
+            </div>
+
+            <div class="badge-pill danger center">EXTREME RISK</div>
+            <p class="doc-note warning" style="margin-top:0.75rem;">Score in bottom 8th percentile. Values &lt; 30 consistently indicate high fake probability.</p>
+            <div class="example-box">
+              <strong>Example</strong> — BBC-quality reporting → 85+. Viral hoax → 20 or lower.
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 6 -->
+        <div class="doc-card">
+          <div class="doc-card-head">
+            <span class="step-num">06</span>
+            <div>
+              <h3 class="doc-card-title">Statistical Distribution Analysis</h3>
+              <p class="doc-card-sub">Shannon entropy · Kolmogorov-Smirnov test</p>
+            </div>
+          </div>
+          <div class="doc-card-body">
+            <p>Sentence length, vocabulary diversity (Shannon entropy), and punctuation patterns are z-scored against real-news norms (GDELT dataset averages).</p>
+
+            <div class="bar-chart-wrap">
+              <div class="bar-chart">
+                <div class="bc-bar" style="height:92%"></div>
+                <div class="bc-bar" style="height:78%"></div>
+                <div class="bc-bar peak" style="height:100%"><span class="bc-warn">⚠</span></div>
+                <div class="bc-bar" style="height:65%"></div>
+                <div class="bc-bar" style="height:48%"></div>
+              </div>
+              <div class="bar-chart-labels">
+                <span>Sent. Length</span>
+                <span>Vocab Div.</span>
+                <span>Punct. Pattern</span>
+                <span>Avg. Word Len</span>
+                <span>Clause Depth</span>
+              </div>
+            </div>
+
+            <p class="doc-note info">Current article deviates 2.9 SD from real-news mean. Such deviation occurs in &lt;1.9% of genuine articles (Kolmogorov-Smirnov test).</p>
+            <div class="example-box">
+              <strong>Example</strong> — Real news → varied sentence lengths. Fake → short, dramatic, repetitive structures.
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 7 -->
+        <div class="doc-card doc-card-final">
+          <div class="doc-card-head">
+            <span class="step-num">07</span>
+            <div>
+              <h3 class="doc-card-title">Final Classification & Verdict</h3>
+              <p class="doc-card-sub">7-tier verdict system · Hard confidence cap 3–97%</p>
+            </div>
+          </div>
+          <div class="doc-card-body">
+            <p>Veritascan uses a <strong>7-tier verdict system</strong> designed to avoid overconfident or misleading classifications. A hard code-level confidence cap of <strong>3–97%</strong> is enforced — the AI model cannot output 100% or 0% under any circumstance.</p>
+
+            <div class="verdict-grid">
+              <div class="verdict-chip real">REAL</div>
+              <div class="verdict-chip likely-real">LIKELY REAL</div>
+              <div class="verdict-chip uncertain">UNCERTAIN</div>
+              <div class="verdict-chip unverifiable">UNVERIFIABLE</div>
+              <div class="verdict-chip misleading">MISLEADING</div>
+              <div class="verdict-chip likely-fake">LIKELY FAKE</div>
+              <div class="verdict-chip fake">FAKE</div>
+            </div>
+
+            <div class="result-card">
+              <div class="result-verdict danger">FAKE</div>
+              <div class="result-confidence">94.3% statistical confidence</div>
+              <div class="result-rows">
+                <div class="result-row"><span>Probability score</span><span class="result-val">94.3%</span></div>
+                <div class="result-row"><span>Emotional deviation</span><span class="result-val">+216%</span></div>
+                <div class="result-row"><span>Fake pattern similarity</span><span class="result-val">92.4%</span></div>
+                <div class="result-row"><span>Credibility score</span><span class="result-val danger">18/100 — Extreme Risk</span></div>
+                <div class="result-row"><span>Distribution deviation</span><span class="result-val">2.9 SD</span></div>
+              </div>
+            </div>
+
+            <div class="example-box">
+              <strong>Example</strong> — Verified CNN reporting → "REAL" @ ~92%. Known hoax → "FAKE" with similar metrics above.
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- PANEL: IMAGE -->
+      <div id="panel-image" class="tab-panel">
+
+        <div class="panel-intro">
+          <span class="panel-label">Image Detection Engine</span>
+          <h2 class="panel-title">AI Image Detection Engine <span class="mono-tag">AIDE</span></h2>
+          <p class="panel-desc">AIDE determines whether a submitted image was generated by an AI model (Midjourney, DALL·E, Stable Diffusion) or captured by a real camera. It combines the <strong>AI or Not API</strong> with pixel-level forensic signals to deliver a reliable, confidence-backed verdict.</p>
+        </div>
+
+        <!-- Step 1 -->
+        <div class="doc-card">
+          <div class="doc-card-head">
+            <span class="step-num">I</span>
+            <div>
+              <h3 class="doc-card-title">AI or Not API — Core Detection Layer</h3>
+              <p class="doc-card-sub">Deep learning classifier · ~96% benchmarked accuracy</p>
+            </div>
+          </div>
+          <div class="doc-card-body">
+            <p>The primary detection signal comes from the <strong>AI or Not API</strong> — a purpose-built classifier trained on millions of AI-generated and authentic photographs. The image is base64-encoded and sent to the API endpoint, which returns a binary classification (<em>AI-generated</em> or <em>Human-made</em>) alongside a probability score.</p>
+
+            <div class="stat-row">
+              <div class="stat-card danger">
+                <div class="stat-num">91.7%</div>
+                <div class="stat-lbl">AI-Generated Probability</div>
+              </div>
+              <div class="stat-card success">
+                <div class="stat-num">8.3%</div>
+                <div class="stat-lbl">Human-Made Probability</div>
+              </div>
+            </div>
+
+            <div class="badge-pill danger">API Verdict: AI_GENERATED — Confidence: 0.917</div>
+            <p class="doc-note danger">Scores above 0.85 are classified as AI-generated. Benchmarked at ~96% accuracy on Midjourney v5, DALL·E 3, and Stable Diffusion XL test sets.</p>
+            <div class="example-box">
+              <strong>How it works</strong> — The image is base64-encoded and submitted via POST to the AI or Not endpoint. The API's deep learning model returns a probability distribution over the two classes.
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="doc-card">
+          <div class="doc-card-head">
+            <span class="step-num">II</span>
+            <div>
+              <h3 class="doc-card-title">Pixel-Level Forensic Analysis</h3>
+              <p class="doc-card-sub">PRNU · ELA · Laplacian variance</p>
+            </div>
+          </div>
+          <div class="doc-card-body">
+            <p>AIDE performs three local forensic checks that exploit statistical fingerprints left by AI generative models versus real camera sensors.</p>
+
+            <div class="sub-block">
+              <div class="sub-block-title">Noise Pattern Analysis (Camera Sensor Fingerprint)</div>
+              <p>Authentic camera images contain Photo-Response Non-Uniformity (PRNU) — a unique noise pattern from manufacturing imperfections. AI images lack this signal entirely, producing near-zero noise floors detectable via FFT frequency-domain analysis.</p>
+              <div class="bar-row" style="margin-top:0.65rem;">
+                <span>Detected sensor noise variance</span>
+                <span class="danger">0.003 (near-zero)</span>
+              </div>
+              <div class="progress-track"><div class="progress-fill danger" style="width:3%"></div></div>
+              <p class="mono-note">Expected range in real photos: 0.04 – 0.18 variance</p>
+            </div>
+
+            <div class="sub-block">
+              <div class="sub-block-title">JPEG Compression Artifact Consistency</div>
+              <p>Real photographs accumulate compression artifacts in predictable DCT block patterns (8×8 grids). AI images saved as JPEG show inconsistent or pristine block structures — a statistical anomaly flagged by Error Level Analysis (ELA).</p>
+              <div class="bar-row" style="margin-top:0.65rem;">
+                <span>ELA inconsistency score</span>
+                <span class="warning">HIGH (anomalous)</span>
+              </div>
+              <div class="progress-track"><div class="progress-fill warning" style="width:82%"></div></div>
+            </div>
+
+            <div class="sub-block">
+              <div class="sub-block-title">Texture Regularity &amp; High-Frequency Content</div>
+              <p>Generative models (GANs, diffusion models) produce unnaturally smooth textures in backgrounds, hair, and fabric. Laplacian variance is measured per region; AI images score significantly lower than real photographs.</p>
+              <div class="bar-group" style="margin-top:0.65rem;">
+                <div class="bar-row"><span class="danger">Submitted image (Laplacian variance)</span><span>18.4</span></div>
+                <div class="progress-track"><div class="progress-fill danger" style="width:18%"></div></div>
+                <div class="bar-row" style="margin-top:0.5rem;"><span class="success">Typical real photo baseline</span><span>96.0</span></div>
+                <div class="progress-track"><div class="progress-fill success" style="width:96%"></div></div>
+              </div>
+            </div>
+
+            <div class="example-box">
+              <strong>Example</strong> — A real street photo → high sensor noise, natural DCT blocking, varied texture variance. A Midjourney portrait → near-zero sensor noise, smooth ELA map, unnaturally low Laplacian score.
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="doc-card">
+          <div class="doc-card-head">
+            <span class="step-num">III</span>
+            <div>
+              <h3 class="doc-card-title">Metadata &amp; Provenance Checks</h3>
+              <p class="doc-card-sub">EXIF inspection · software tag detection</p>
+            </div>
+          </div>
+          <div class="doc-card-body">
+            <p>EXIF metadata is inspected for authenticity signals. Real camera images typically contain shutter speed, ISO, aperture, GPS coordinates, and a recognized camera model string. AI-generated images either lack EXIF data entirely or carry software-generated tags (e.g. <em>"Adobe Firefly"</em>, <em>"StableDiffusion"</em>).</p>
+
+            <div class="meta-table">
+              <div class="meta-row">
+                <span class="meta-key">Camera Model</span>
+                <span class="meta-val danger">Not found</span>
+              </div>
+              <div class="meta-row">
+                <span class="meta-key">GPS / Location Data</span>
+                <span class="meta-val danger">Absent</span>
+              </div>
+              <div class="meta-row">
+                <span class="meta-key">Software Tag</span>
+                <span class="meta-val warning">"Midjourney v6"</span>
+              </div>
+              <div class="meta-row">
+                <span class="meta-key">Shutter / ISO / Aperture</span>
+                <span class="meta-val danger">Not found</span>
+              </div>
+            </div>
+
+            <p class="doc-note warning">3 of 4 provenance checks failed. Missing camera metadata combined with a known AI software tag is a strong indicator of synthetic origin.</p>
+            <div class="example-box">
+              <strong>Example</strong> — Canon EOS R5 JPEG → full EXIF with GPS, lens model, shutter data. DALL·E export → no camera metadata, "Adobe Generative" software string.
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="doc-card doc-card-final">
+          <div class="doc-card-head">
+            <span class="step-num">IV</span>
+            <div>
+              <h3 class="doc-card-title">Final AI Image Detection Result</h3>
+              <p class="doc-card-sub">Combined signal scoring</p>
+            </div>
+          </div>
+          <div class="doc-card-body">
+            <div class="result-card">
+              <div class="result-verdict danger">AI-GENERATED</div>
+              <div class="result-confidence">91.7% detection confidence</div>
+              <div class="result-rows">
+                <div class="result-row"><span>AI or Not API score</span><span class="result-val">91.7%</span></div>
+                <div class="result-row"><span>Sensor noise variance</span><span class="result-val danger">0.003 — Near-zero (anomalous)</span></div>
+                <div class="result-row"><span>ELA inconsistency</span><span class="result-val danger">HIGH</span></div>
+                <div class="result-row"><span>Texture variance</span><span class="result-val">18.4 vs 96.0 baseline</span></div>
+                <div class="result-row"><span>EXIF provenance</span><span class="result-val danger">3/4 checks failed</span></div>
+              </div>
+            </div>
+            <div class="example-box">
+              <strong>Example</strong> — Authentic press photo → "HUMAN-MADE" @ ~94%. AI portrait generated in Midjourney → "AI-GENERATED" with similar metrics to above.
+            </div>
+          </div>
+        </div>
+
+      </div><
+
+      <!-- PANEL: AI ENGINE -->
+      <div id="panel-engine" class="tab-panel">
+
+        <div class="panel-intro">
+          <span class="panel-label">System Architecture</span>
+          <h2 class="panel-title">Live AI Engine <span class="mono-tag">v2.0</span></h2>
+          <p class="panel-desc">A deep look at the data sources, fallback logic, confidence enforcement, and live search pipeline that power every Veritascan verdict.</p>
+        </div>
+
+        <!-- Source Priority -->
+        <div class="doc-card">
+          <div class="doc-card-head">
+            <span class="step-num">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </span>
+            <div>
+              <h3 class="doc-card-title">Live Source Priority Hierarchy</h3>
+              <p class="doc-card-sub">9 sources · Ranked by reliability</p>
+            </div>
+          </div>
+          <div class="doc-card-body">
+            <p>Every fact-check query searches up to 9 sources simultaneously. Sources are weighted by reliability in the final verdict.</p>
+
+            <div class="source-list">
+              <div class="source-row">
+                <div class="source-rank">1</div>
+                <div class="source-info">
+                  <div class="source-name">Google Fact Check API <span class="source-tag fc">FC</span></div>
+                  <div class="source-desc">Previously fact-checked claims by professional organizations — highest credibility for news claims.</div>
+                </div>
+              </div>
+              <div class="source-row">
+                <div class="source-rank">2</div>
+                <div class="source-info">
+                  <div class="source-name">DuckDuckGo Instant Answer <span class="source-tag ddg">DDG</span></div>
+                  <div class="source-desc">Direct factual answers — very high reliability for specific facts like birthdates.</div>
+                </div>
+              </div>
+              <div class="source-row">
+                <div class="source-rank">3</div>
+                <div class="source-info">
+                  <div class="source-name">Google Knowledge Graph <span class="source-tag kg">KG</span></div>
+                  <div class="source-desc">Verified structured data about people, places, and organizations.</div>
+                </div>
+              </div>
+              <div class="source-row">
+                <div class="source-rank">4</div>
+                <div class="source-info">
+                  <div class="source-name">Wikidata <span class="source-tag wd">WD</span></div>
+                  <div class="source-desc">Structured biographical database — excellent for birthdates, nationalities, occupations.</div>
+                </div>
+              </div>
+              <div class="source-row">
+                <div class="source-rank">5</div>
+                <div class="source-info">
+                  <div class="source-name">Wikipedia <span class="source-tag wk">WK</span></div>
+                  <div class="source-desc">Strong supporting evidence for biographical and historical facts.</div>
+                </div>
+              </div>
+              <div class="source-row">
+                <div class="source-rank">6</div>
+                <div class="source-info">
+                  <div class="source-name">Google Search (Serper) <span class="source-tag s">S / A</span></div>
+                  <div class="source-desc">Answer Box (A1) has highest priority; top news stories and web results follow.</div>
+                </div>
+              </div>
+              <div class="source-row">
+                <div class="source-rank">7</div>
+                <div class="source-info">
+                  <div class="source-name">NewsAPI <span class="source-tag n">N</span></div>
+                  <div class="source-desc">Recent news articles — up to 3 keyword retry strategies if initial query returns no results.</div>
+                </div>
+              </div>
+              <div class="source-row">
+                <div class="source-rank">8</div>
+                <div class="source-info">
+                  <div class="source-name">GNews <span class="source-tag g">G</span></div>
+                  <div class="source-desc">Fallback news source activated only when NewsAPI returns no results.</div>
+                </div>
+              </div>
+              <div class="source-row">
+                <div class="source-rank low">9</div>
+                <div class="source-info">
+                  <div class="source-name">General Web Results <span class="source-tag w">W</span></div>
+                  <div class="source-desc">Lowest priority — general web results, used for context only.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Confidence Cap -->
+        <div class="doc-card">
+          <div class="doc-card-head">
+            <span class="step-num">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </span>
+            <div>
+              <h3 class="doc-card-title">Confidence Cap Enforcement</h3>
+              <p class="doc-card-sub">Hard-coded 3% – 97% clamp · Cannot be bypassed by AI</p>
+            </div>
+          </div>
+          <div class="doc-card-body">
+            <p>Even when an AI model returns 100% confidence, Veritascan's server enforces a <strong>hard clamp of 3–97%</strong> on all confidence values and credibility scores before they are displayed. This is applied at the code level — the AI model cannot bypass it regardless of prompt instructions.</p>
+
+            <div class="confidence-visual">
+              <div class="conf-scale">
+                <div class="conf-zone low-zone">
+                  <span>3%</span>
+                  <span class="conf-zone-label">Min</span>
+                </div>
+                <div class="conf-zone mid-zone">
+                  <span>50%</span>
+                  <span class="conf-zone-label">Uncertain</span>
+                </div>
+                <div class="conf-zone high-zone">
+                  <span>97%</span>
+                  <span class="conf-zone-label">Max</span>
+                </div>
+              </div>
+              <p class="mono-note" style="text-align:center;margin-top:0.5rem;">Any value outside 3–97% is automatically clamped before display</p>
+            </div>
+
+            <div class="conf-table">
+              <div class="conf-row"><span class="conf-range">90 – 97%</span><span class="conf-meaning">Official announcement or high-confidence training knowledge</span></div>
+              <div class="conf-row"><span class="conf-range">70 – 89%</span><span class="conf-meaning">Strong credible evidence but no official announcement</span></div>
+              <div class="conf-row"><span class="conf-range">50 – 69%</span><span class="conf-meaning">Mixed or limited evidence</span></div>
+              <div class="conf-row"><span class="conf-range">30 – 49%</span><span class="conf-meaning">Mostly rumors or speculation</span></div>
+              <div class="conf-row"><span class="conf-range">3 – 29%</span><span class="conf-meaning">Almost no evidence, or evidence actively contradicts</span></div>
+            </div>
+
+            <div class="example-box">
+              <strong>Why this matters</strong> — Intellectual honesty is the core principle. A verdict of UNVERIFIABLE with 45% confidence is always more honest than a false REAL verdict at 99%.
+            </div>
+          </div>
+        </div>
+
+        <!-- Fallback Logic -->
+        <div class="doc-card">
+          <div class="doc-card-head">
+            <span class="step-num">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+            </span>
+            <div>
+              <h3 class="doc-card-title">Model Fallback &amp; Availability Logic</h3>
+              <p class="doc-card-sub">Automatic cascade · 10 models · Zero downtime</p>
+            </div>
+          </div>
+          <div class="doc-card-body">
+            <p>If the primary model (Gemini 2.0 Flash) fails due to rate limits (HTTP 429) or unavailability (HTTP 404), the system automatically cascades through a priority-ranked list of 9 fallback models. Each model is tried in order until a valid response is received.</p>
+
+            <div class="flow-chain">
+              <div class="flow-node primary-node">Gemini 2.0 Flash<span class="flow-tag">Primary</span></div>
+              <div class="flow-arrow">→</div>
+              <div class="flow-node">DeepSeek Chat v3</div>
+              <div class="flow-arrow">→</div>
+              <div class="flow-node">DeepSeek R1</div>
+              <div class="flow-arrow">→</div>
+              <div class="flow-node">Llama 4 Maverick</div>
+              <div class="flow-arrow">→</div>
+              <div class="flow-node muted-node">+6 more fallbacks</div>
+            </div>
+
+            <p class="doc-note info">Fallback is only triggered on HTTP 429 (rate limit) or 404 (unavailable). Other errors are surfaced to the user immediately.</p>
+          </div>
+        </div>
+
+        <!-- Scan Time / Stats -->
+        <div class="doc-card">
+          <div class="doc-card-head">
+            <span class="step-num">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+            </span>
+            <div>
+              <h3 class="doc-card-title">System Performance &amp; Limits</h3>
+              <p class="doc-card-sub">Key figures at a glance</p>
+            </div>
+          </div>
+          <div class="doc-card-body">
+            <div class="perf-grid">
+              <div class="perf-card">
+                <div class="perf-val primary">~2.4s</div>
+                <div class="perf-lbl">Average scan time</div>
+              </div>
+              <div class="perf-card">
+                <div class="perf-val">9+</div>
+                <div class="perf-lbl">Live data sources</div>
+              </div>
+              <div class="perf-card">
+                <div class="perf-val">10</div>
+                <div class="perf-lbl">Available AI models</div>
+              </div>
+              <div class="perf-card">
+                <div class="perf-val warning">97%</div>
+                <div class="perf-lbl">Hard confidence cap</div>
+              </div>
+              <div class="perf-card">
+                <div class="perf-val">7</div>
+                <div class="perf-lbl">Verdict categories</div>
+              </div>
+              <div class="perf-card">
+                <div class="perf-val success">4KB</div>
+                <div class="perf-lbl">Max URL content extract</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+
+  <!-- FOOTER -->
+  <footer>
+      <div class="container">
+      <div class="footer-top">
+          <div class="footer-brand">
+          <div class="footer-logo"></div>
+          <p class="footer-tagline">Veritas semper vincit mendacium.</p>
+          </div>
+          <div class="footer-nav">
+          <div class="footer-col">
+              <span class="footer-col-label">Links</span>
+              <ul>
+              <li><a href="../html/chatbot.html">Verify News</a></li>
+              <li><a href="../html/imageDetector.html">AI Detector</a></li>
+              <li><a href="../html/docs.html">Docs</a></li>
+              </ul>
+          </div>
+          <div class="footer-col">
+              <span class="footer-col-label">Sources</span>
+              <ul>
+              <li><a href="https://newsapi.org" target="_blank" rel="noopener">NewsAPI</a></li>
+              <li><a href="https://gnews.io" target="_blank" rel="noopener">GNews</a></li>
+              <li><a href="https://wikipedia.org" target="_blank" rel="noopener">Wikipedia</a></li>
+              <li><a href="https://wikidata.org" target="_blank" rel="noopener">Wikidata</a></li>
+              </ul>
+          </div>
+          <div class="footer-col">
+              <span class="footer-col-label">cross-check</span>
+              <ul>
+              <li><a href="https://factcheck.afp.com" target="_blank" rel="noopener">AFP Fact Check</a></li>
+              <li><a href="https://snopes.com" target="_blank" rel="noopener">Snopes</a></li>
+              <li><a href="https://news.google.com" target="_blank" rel="noopener">Cross-Check Sources</a></li>
+              <li><a href="https://toolbox.google.com/factcheck" target="_blank" rel="noopener">Google Fact Check</a></li>
+              </ul>
+          </div>
+          </div>
+      </div>
+      <div class="footer-divider"></div>
+      <div class="footer-bottom">
+          <span class="footer-copy">&copy; 2026 Veritascan. All rights reserved.</span>
+      </div>
+      </div>
+  </footer>
+  
+
+  <script src="../scripts/script.js"></script>
+  <script src="../scripts/docs.js"></script>
+
+</body>
+</html>

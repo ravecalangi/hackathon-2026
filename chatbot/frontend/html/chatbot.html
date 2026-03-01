@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veritascan — News Assistant</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../styles/styles.css">
+    <link rel="stylesheet" href="../styles/chatbot.css">
+    <link rel="stylesheet" href="../styles/newsApi.css">
+    <link rel="stylesheet" href="../styles/layout.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mammoth/mammoth.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist/build/pdf.min.js"></script>
+</head>
+<body>
+
+    <!-- GREETING OVERLAY -->
+    <div id="greeting-overlay" class="greeting-overlay">
+
+        <!-- Subtle background grid -->
+        <div class="greeting-bg-grid"></div>
+
+        <div class="greeting-chat-window">
+
+            <!-- AI avatar + name -->
+            <div class="greeting-ai-header">
+                <div class="greeting-ai-avatar">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="10" cy="10" r="6"/>
+                        <path d="m21 21-4.35-4.35"/>
+                        <path d="m7.5 10 2 2 3-3"/>
+                    </svg>
+                </div>
+                <div class="greeting-ai-meta">
+                    <span class="greeting-ai-name">Veritascan</span>
+                    <span class="greeting-ai-status">
+                        <span class="greeting-status-dot"></span>
+                        online
+                    </span>
+                </div>
+            </div>
+
+            <!-- Messages will be injected here by JS -->
+            <div class="greeting-messages" id="greeting-messages"></div>
+
+            <!-- Input area - hidden until AI finishes typing -->
+            <div class="greeting-input-area" id="greeting-input-area">
+                <div class="greeting-input-row">
+                    <input
+                        id="greeting-name-input"
+                        type="text"
+                        class="greeting-name-input"
+                        placeholder="Type your name…"
+                        maxlength="30"
+                        autocomplete="off"
+                        autocapitalize="words"
+                    />
+                    <button id="greeting-submit-btn" class="greeting-send-btn" disabled aria-label="Send">
+                        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="22" y1="2" x2="11" y2="13"/>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- END GREETING OVERLAY -->
+
+    <!-- NAVBAR -->
+    <nav id="navbar">
+        <div class="container flex items-center justify-between">
+        <div class="nav-logo" style="display:flex; align-items:center; gap:7px;">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--primary)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="10" cy="10" r="6"/>
+                <path d="m21 21-4.35-4.35"/>
+                <path d="m7.5 10 2 2 3-3"/>
+            </svg>
+            <span id="web-name">Verita<span style="color: var(--primary);">scan</span></span>
+        </div>
+
+            <div class="nav-links md-flex hidden gap-4 items-center">
+                <a href="index.html">Home</a>
+                <a href="chatbot.html" id="verify-news">Verify News</a>
+                <a href="imageDetector.html">AI Detector</a>
+                <a href="docs.html">Docs</a>
+                <button id="theme-toggle">
+                    <span class="toggle-thumb">
+                        <svg class="toggle-icon toggle-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                        </svg>
+                        <svg class="toggle-icon toggle-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                        </svg>
+                    </span>
+                </button>
+            </div>
+            <button class="md-hidden" style="color: var(--text-main);">
+                <svg viewBox="0 0 24 24"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- THREE-COLUMN LAYOUT -->
+    <div class="tri-layout">
+
+        <!-- LEFT PANEL: Chat History -->
+        <aside class="side-panel left-panel">
+
+            <div class="panel-header">
+                <strong>Chat History </strong>
+               <button class="history-clear-btn" id="history-clear-btn" title="Clear all history">
+                    <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="3 6 5 6 21 6"></polyline>
+                        <path d="M19 6l-1 14H6L5 6"></path>
+                        <path d="M9 6V4h6v2"></path>
+                        <line x1="10" y1="11" x2="14" y2="15"></line>
+                        <line x1="14" y1="11" x2="10" y2="15"></line>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="history-list" id="history-list">
+                <div class="history-empty" id="history-empty">
+                    <span>No history yet</span>
+                    <small>Conversations will appear here</small>
+                </div>
+            </div>
+
+        </aside>
+
+        <!-- CENTER PANEL: Chat -->
+        <main class="center-panel">
+            <div class="chatpane-container">
+
+                <div class="conversation-box" id="conversation-box">
+                    <div class="greetings-section" id="greeting-display">Hello!</div>
+                    <h1 class="asking-section">Let's verify the news.</h1>
+                    <div class="description-section">Analyzes online content in real time, spots potential fake news, and delivers trustworthy insights. Supports file uploads (docs, PDFs, text, images) and voice input.</div>
+                </div>
+
+                <div class="main-conversation" id="main-conversation"></div>
+
+                <div class="file-preview-wrapper-container">
+                    <div class="file-preview-wrapper">
+                        <div class="file-preview-container">
+                            <div class="file-container"><img id="preview"></div>
+                            <div id="file-name"></div>
+                            <button id="remove-file-btn" title="Remove file">
+                                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="user-chatbox">
+                    <div class="user-chatbox-input-container">
+                        <textarea 
+                        id="user-chatbox-input" 
+                        placeholder="Type a message or pick a prompt..." 
+                        rows="1"
+                        autocomplete="off"
+                        ></textarea>
+                    </div>
+                    <div class="user-chatbox-btn-container">
+                        <div>
+                            <input type="file" id="file-input" accept=".png,.jpg,.jpeg,.pdf,.docx,.txt" style="display:none !important;">
+                            <button type="button" onclick="document.getElementById('file-input').click();">
+                                <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                            </button>
+                        </div>
+                        <div>
+                            <button id="link-btn-chatbot" type="button">
+                                <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                            </button>
+                        </div>
+                        <div>
+                            <button id="mic-btn" type="button">
+                                <svg viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="12" rx="3"></rect><path d="M5 10a7 7 0 0 0 14 0"></path><line x1="12" y1="19" x2="12" y2="22"></line></svg>
+                            </button>
+                        </div>
+                        <div>
+                            <button id="send-btn" type="button">
+                                <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="note">Veritascan may not be 100% accurate. Check critical info from reliable sources.</div>
+
+            </div>
+        </main>
+
+        <!-- RIGHT PANEL: Suggested Prompts -->
+        <aside class="side-panel right-panel">
+
+            <div class="panel-header">
+                Suggested Prompts
+            </div>
+
+            <div class="panel-scroll-area">
+            <p class="panel-desc">Pick a starter for a <strong>full credibility report</strong>:</p>
+
+            <div class="prompt-list">
+                <button class="prompt-item prompt-item--primary" data-prompt="Verify this: ">
+                    <span class="prompt-badge">FULL</span>
+                    <span class="prompt-content">
+                        <span class="prompt-label">Verify this:</span>
+                        <span class="prompt-sub">Paste any claim or article</span>
+                    </span>
+                </button>
+                <button class="prompt-item prompt-item--primary" data-prompt="Is it true that ">
+                    <span class="prompt-badge">FULL</span>
+                    <span class="prompt-content">
+                        <span class="prompt-label">Is it true that...</span>
+                        <span class="prompt-sub">Ask about a specific claim</span>
+                    </span>
+                </button>
+                <button class="prompt-item prompt-item--primary" data-prompt="Totoo ba na ">
+                    <span class="prompt-badge">FULL</span>
+                    <span class="prompt-content">
+                        <span class="prompt-label">Totoo ba na...</span>
+                        <span class="prompt-sub">Sa Filipino</span>
+                    </span>
+                </button>
+                <button class="prompt-item prompt-item--primary" data-prompt="Fact check this: ">
+                    <span class="prompt-badge">FULL</span>
+                    <span class="prompt-content">
+                        <span class="prompt-label">Fact check this:</span>
+                        <span class="prompt-sub">Full credibility analysis</span>
+                    </span>
+                </button>
+                <button class="prompt-item prompt-item--primary" data-prompt="Debunk this: ">
+                    <span class="prompt-badge">FULL</span>
+                    <span class="prompt-content">
+                        <span class="prompt-label">Debunk this:</span>
+                        <span class="prompt-sub">Challenge a false claim</span>
+                    </span>
+                </button>
+            </div>
+
+            <div class="panel-divider"></div>
+
+            <p class="panel-desc">What's Trending Now</p>
+
+            <div class="prompt-list">
+                <button class="prompt-item prompt-item--subtle" data-prompt="Is it true that Pacquiao has a fight against Mayweather this September 2026?">
+                    <span class="prompt-dot"></span>
+                    <span class="prompt-label-simple">Pacquiao vs Mayweather September 2026</span>
+                </button>
+                <button class="prompt-item prompt-item--subtle" data-prompt="Verify this claim: Trump signed an executive order banning TikTok permanently in the US">
+                    <span class="prompt-dot"></span>
+                    <span class="prompt-label-simple">Trump bans TikTok permanently in the US</span>
+                </button>
+                <button class="prompt-item prompt-item--subtle" data-prompt="Totoo ba na nag-resign si Sara Duterte bilang Bise Presidente ng Pilipinas?">
+                    <span class="prompt-dot"></span>
+                    <span class="prompt-label-simple">Sara Duterte nagresign bilang VP</span>
+                </button>
+                <button class="prompt-item prompt-item--subtle" data-prompt="Fact check this: Elon Musk officially bought Twitter and rebranded it back from X to Twitter">
+                    <span class="prompt-dot"></span>
+                    <span class="prompt-label-simple">Elon Musk rebrands X back to Twitter</span>
+                </button>
+                <button class="prompt-item prompt-item--subtle" data-prompt="May announcement ba na babalik si PRRD sa pulitika para sa 2028 elections?">
+                    <span class="prompt-dot"></span>
+                    <span class="prompt-label-simple">Duterte babalik sa pulitika 2028</span>
+                </button>
+                <button class="prompt-item prompt-item--subtle" data-prompt="Can you verify this: The Philippines will experience a major earthquake above magnitude 8.0 this 2026 according to PHIVOLCS">
+                    <span class="prompt-dot"></span>
+                    <span class="prompt-label-simple">Magnitude 8.0 earthquake warning Philippines 2026</span>
+                </button>
+                <button class="prompt-item prompt-item--subtle" data-prompt="Peke ba o totoo na libre na ang tuition fee sa lahat ng state universities sa Pilipinas simula 2026?">
+                    <span class="prompt-dot"></span>
+                    <span class="prompt-label-simple">Libre tuition fee sa lahat ng SUCs 2026</span>
+                </button>
+                <button class="prompt-item prompt-item--subtle" data-prompt="Is this real or fake news: Netflix is shutting down its service in Southeast Asia by mid-2026">
+                    <span class="prompt-dot"></span>
+                    <span class="prompt-label-simple">Netflix shutting down in Southeast Asia</span>
+                </button>
+            </div>
+
+            </div>
+
+        </aside>
+
+    </div>
+
+    <!-- LINK MODAL -->
+    <div id="link-modal" class="link-modal-overlay">
+        <div class="link-modal-box">
+            <div class="link-modal-header">
+                <span>🔗 Analyze a URL</span>
+                <button id="link-modal-close">&times;</button>
+            </div>
+            <p class="link-modal-desc">Paste a news article or webpage link to verify its content.</p>
+            <input id="link-modal-input" type="url" placeholder="https://example.com/article" autocomplete="off"/>
+            <button id="link-modal-submit">Analyze Link</button>
+        </div>
+    </div>
+
+    <script type="module" src="../scripts/script.js"></script>
+    <script type="module" src="../scripts/chatbot.js"></script>
+    <script type="module" src="../scripts/imgToText.js"></script>
+
+</body>
+</html>

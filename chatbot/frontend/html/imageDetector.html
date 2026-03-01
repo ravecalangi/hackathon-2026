@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Detector — Veritascan</title>
+    <link rel="stylesheet" href="../styles/styles.css">
+    <link rel="stylesheet" href="../styles/imageDetector.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav id="navbar">
+        <div class="container flex items-center justify-between">
+            <div class="nav-logo" style="display:flex; align-items:center; gap:7px;">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--primary)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="10" cy="10" r="6"/>
+                    <path d="m21 21-4.35-4.35"/>
+                    <path d="m7.5 10 2 2 3-3"/>
+                </svg>
+                <span id="web-name">Verita<span style="color: var(--primary);">scan</span></span>
+            </div>
+            <div class="nav-links md-flex hidden gap-4 items-center">
+                <a href="index.html">Home</a>
+                <a href="chatbot.html">Verify News</a>
+                <a href="imageDetector.html" id="ai-detector">AI Detector</a>
+                <a href="docs.html">Docs</a>
+                <button id="theme-toggle">
+                    <span class="toggle-thumb">
+                        <svg class="toggle-icon toggle-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                        </svg>
+                        <svg class="toggle-icon toggle-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                        </svg>
+                    </span>
+                </button>
+            </div>
+            <button class="md-hidden" style="color: var(--text-main);">
+                <svg viewBox="0 0 24 24"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- MAIN -->
+    <main class="detector-main">
+        <div class="container" id="detector-main-inner">
+
+            <div class="detector-header">
+                <h1>AI Content Detector</h1>
+                <p>Detect AI-generated images, deepfakes, NSFW content, or AI-written text.</p>
+            </div>
+
+            <!-- TABS -->
+            <div class="detector-tabs">
+                <button class="detector-tab active" id="tab-image" data-tab="image">
+                    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                    Image Detector
+                </button>
+                <button class="detector-tab" id="tab-text" data-tab="text">
+                    <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                    Text Detector
+                </button>
+            </div>
+
+
+            <!-- IMAGE TAB -->
+            <div id="panel-image" class="detector-panel">
+                <div class="detector-wrapper">
+
+                    <!-- TOP ROW: Upload form + large preview -->
+                    <div class="detector-top">
+
+                        <!-- Upload Card -->
+                        <div class="detector-card">
+                            <form id="detector-form" style="display:contents;">
+                                <div class="drop-zone" id="dropZone">
+                                    <div id="dropInner" class="drop-inner">
+                                        <div class="upload-icon-wrap">
+                                            <svg viewBox="0 0 24 24" class="upload-icon">
+                                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                                <polyline points="17 8 12 3 7 8"/>
+                                                <line x1="12" y1="3" x2="12" y2="15"/>
+                                            </svg>
+                                        </div>
+                                        <p class="drop-label">Drop your image here</p>
+                                        <p class="drop-sub">JPG, PNG, WEBP supported</p>
+                                        <label class="btn-browse" for="imageInput">Browse</label>
+                                        <input type="file" id="imageInput" name="image" accept="image/*" required hidden />
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn-analyze" id="analyzeBtn">
+                                    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                                    Analyze Image
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Large Image Preview -->
+                        <div class="image-preview-card" id="imagePreviewCard">
+                            <div class="image-placeholder" id="imagePlaceholder">
+                                <svg viewBox="0 0 24 24">
+                                    <rect x="3" y="3" width="18" height="18" rx="2"/>
+                                    <circle cx="8.5" cy="8.5" r="1.5"/>
+                                    <polyline points="21 15 16 10 5 21"/>
+                                </svg>
+                                <p>Preview will appear here</p>
+                            </div>
+                            <img id="previewImgLarge" src="" alt="Preview" style="display:none;" />
+                            <div class="preview-overlay" id="previewOverlay">
+                                <div class="preview-overlay-icon">
+                                    <svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                                </div>
+                            </div>
+                            <button type="button" class="preview-remove-btn" id="removeBtn" style="display:none;">✕ Remove</button>
+                        </div>
+
+                    </div>
+
+                    <!-- BOTTOM ROW: Results -->
+                    <div class="results-panel">
+
+                        <div id="emptyState" class="empty-state">
+                            <div class="empty-icon-wrap">
+                                <svg viewBox="0 0 24 24" class="empty-icon">
+                                    <circle cx="11" cy="11" r="8"/>
+                                    <path d="m21 21-4.3-4.3"/>
+                                </svg>
+                            </div>
+                            <p>Upload an image to see results</p>
+                        </div>
+
+                        <div id="loading" style="display:none;">
+                            <div class="spinner-wrap">
+                                <div class="spinner"></div>
+                                <p class="spinner-label">analyzing...</p>
+                            </div>
+                        </div>
+
+                        <div id="error-box" class="error-box" style="display:none;"></div>
+
+                        <div id="results" style="display:none;">
+                            <p class="results-title">Analysis Results</p>
+
+                            <div class="result-cards">
+                                <div class="result-card">
+                                    <div class="result-card-label">AI Generated</div>
+                                    <div class="result-verdict" id="verdict-ai"></div>
+                                    <div id="bars-ai"></div>
+                                </div>
+                                <div class="result-card">
+                                    <div class="result-card-label">Deepfake</div>
+                                    <div class="result-verdict" id="verdict-df"></div>
+                                    <div id="bars-df"></div>
+                                </div>
+                                <div class="result-card">
+                                    <div class="result-card-label">NSFW</div>
+                                    <div class="result-verdict" id="verdict-nsfw"></div>
+                                </div>
+                                <div class="result-card">
+                                    <div class="result-card-label">Quality</div>
+                                    <div class="result-verdict" id="verdict-quality"></div>
+                                </div>
+                            </div>
+
+                            <div class="results-bottom">
+                                <div class="image-description">
+                                    <div class="image-description-label">Analysis Note</div>
+                                    <p class="image-description-text" id="desc-text"></p>
+                                    <span class="image-description-badge" id="desc-badge"></span>
+                                </div>
+                                <div class="meta-row" id="meta-row"></div>
+                            </div>
+
+                            <p class="disclaimer">⚠ Best used on <strong>photorealistic images</strong>. Cartoons and illustrations may not be accurate.</p>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- TEXT TAB -->
+            <div id="panel-text" class="detector-panel" style="display:none;">
+                <div class="detector-wrapper text-wrapper">
+
+                    <!-- LEFT: Input card -->
+                    <div class="detector-card text-input-card">
+                        <div class="text-input-label">Paste or type your text below</div>
+                        <textarea id="textInput" class="text-textarea" placeholder="Enter the text you want to analyze for AI generation...&#10;&#10;Minimum 50 characters recommended for accurate results."></textarea>
+                        <div class="text-meta-row">
+                            <span class="text-char-count" id="charCount">0 characters</span>
+                            <button type="button" class="btn-clear-text" id="clearTextBtn">Clear</button>
+                        </div>
+                        <button type="button" class="btn-analyze" id="analyzeTextBtn">
+                            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                            Analyze Text
+                        </button>
+                    </div>
+
+                    <!-- RIGHT: Results -->
+                    <div class="results-panel">
+
+                        <div id="textEmptyState" class="empty-state">
+                            <div class="empty-icon-wrap">
+                                <svg viewBox="0 0 24 24" class="empty-icon">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                    <polyline points="14 2 14 8 20 8"/>
+                                </svg>
+                            </div>
+                            <p>Paste text to see results</p>
+                        </div>
+
+                        <div id="textLoading" style="display:none;">
+                            <div class="spinner-wrap">
+                                <div class="spinner"></div>
+                                <p class="spinner-label">analyzing...</p>
+                            </div>
+                        </div>
+
+                        <div id="textErrorBox" class="error-box" style="display:none;"></div>
+
+                        <div id="textResults" style="display:none;">
+                            <p class="results-title">Text Analysis Results</p>
+
+                            <div class="result-cards text-result-cards">
+                                <div class="result-card">
+                                    <div class="result-card-label">Verdict</div>
+                                    <div class="result-verdict" id="text-verdict-main"></div>
+                                </div>
+                                <div class="result-card">
+                                    <div class="result-card-label">AI Score</div>
+                                    <div class="result-verdict" id="text-verdict-score"></div>
+                                    <div id="text-bars-score"></div>
+                                </div>
+                                <div class="result-card">
+                                    <div class="result-card-label">Human Score</div>
+                                    <div class="result-verdict" id="text-verdict-human"></div>
+                                    <div id="text-bars-human"></div>
+                                </div>
+                            </div>
+
+                            <div class="results-bottom">
+                                <div class="image-description">
+                                    <div class="image-description-label">Analysis Note</div>
+                                    <p class="image-description-text" id="text-desc-text"></p>
+                                    <span class="image-description-badge" id="text-desc-badge"></span>
+                                </div>
+                            </div>
+
+                            <p class="disclaimer">⚠ Text detection accuracy improves with <strong>longer samples</strong>. Short texts may yield uncertain results.</p>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- LIGHTBOX -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-backdrop" id="lightboxBackdrop"></div>
+        <div class="lightbox-content">
+            <button class="lightbox-close" id="lightboxClose">✕</button>
+            <img id="lightboxImg" src="" alt="Full preview" />
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+        <div class="footer-top">
+            <div class="footer-brand">
+            <div class="footer-logo"></div>
+            <p class="footer-tagline">Veritas semper vincit mendacium.</p>
+            </div>
+            <div class="footer-nav">
+            <div class="footer-col">
+                <span class="footer-col-label">Links</span>
+                <ul>
+                <li><a href="../html/chatbot.html">Verify News</a></li>
+                <li><a href="../html/imageDetector.html">AI Detector</a></li>
+                <li><a href="../html/docs.html">Docs</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <span class="footer-col-label">Sources</span>
+                <ul>
+                <li><a href="https://newsapi.org" target="_blank" rel="noopener">NewsAPI</a></li>
+                <li><a href="https://gnews.io" target="_blank" rel="noopener">GNews</a></li>
+                <li><a href="https://wikipedia.org" target="_blank" rel="noopener">Wikipedia</a></li>
+                <li><a href="https://wikidata.org" target="_blank" rel="noopener">Wikidata</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <span class="footer-col-label">cross-check</span>
+                <ul>
+                <li><a href="https://factcheck.afp.com" target="_blank" rel="noopener">AFP Fact Check</a></li>
+                <li><a href="https://snopes.com" target="_blank" rel="noopener">Snopes</a></li>
+                <li><a href="https://news.google.com" target="_blank" rel="noopener">Cross-Check Sources</a></li>
+                <li><a href="https://toolbox.google.com/factcheck" target="_blank" rel="noopener">Google Fact Check</a></li>
+                </ul>
+            </div>
+            </div>
+        </div>
+        <div class="footer-divider"></div>
+        <div class="footer-bottom">
+            <span class="footer-copy">&copy; 2026 Veritascan. All rights reserved.</span>
+        </div>
+        </div>
+    </footer>
+
+    <script src="../scripts/script.js"></script>
+    <script src="../scripts/imageDetector.js"></script>
+
+</body>
+</html>

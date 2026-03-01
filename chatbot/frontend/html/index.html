@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Veritascan - Fake News Detector AI Chatbot</title>
+  <link rel="stylesheet" href="../styles/styles.css">
+  <link rel="stylesheet" href="../styles/getStarted.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<main class="page-wrapper">
+
+  <!-- NAVBAR -->
+  <nav id="navbar">
+    <div class="container flex items-center justify-between">
+      <div class="nav-logo" style="display:flex; align-items:center; gap:7px;">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--primary)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="10" cy="10" r="6"/>
+          <path d="m21 21-4.35-4.35"/>
+          <path d="m7.5 10 2 2 3-3"/>
+        </svg>
+        <span id="web-name">Verita<span style="color: var(--primary);">scan</span></span>
+      </div>
+      <div class="nav-links md-flex hidden gap-4 items-center">
+        <a href="index.html" id="home">Home</a>
+        <a href="chatbot.html">Verify News</a>
+        <a href="imageDetector.html">AI Detector</a>
+        <a href="docs.html">Docs</a>
+        <button id="theme-toggle">
+          <span class="toggle-thumb">
+            <svg class="toggle-icon toggle-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+            </svg>
+            <svg class="toggle-icon toggle-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+          </span>
+        </button>
+      </div>
+      <button class="md-hidden" style="color: var(--text-main);">
+        <svg viewBox="0 0 24 24"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- GET STARTED MODAL -->
+  <div class="gs-overlay" id="gsOverlay">
+    <!-- Curtain panels -->
+    <div class="gs-curtain gs-curtain-left"></div>
+    <div class="gs-curtain gs-curtain-right"></div>
+
+    <div class="gs-modal" id="gsModal">
+
+      <div class="gs-modal-header">
+        <div>
+          <div class="gs-modal-title">Where do you want to start?</div>
+          <div class="gs-modal-sub">Choose a tool to get started with Veritascan.</div>
+        </div>
+        <button class="gs-close" id="gsClose" aria-label="Close">
+          <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+
+      <div class="gs-divider"></div>
+
+      <div class="gs-options">
+
+        <a href="chatbot.html" class="gs-option">
+          <div class="gs-option-icon">
+            <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <div class="gs-option-body">
+            <span class="gs-option-name">Verify News</span>
+            <span class="gs-option-desc">Ask the chatbot to fact-check URLs, text, claims, or images in real time.</span>
+          </div>
+          <span class="gs-option-arrow">
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
+        </a>
+
+        <a href="imageDetector.html" class="gs-option">
+          <div class="gs-option-icon">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          </div>
+          <div class="gs-option-body">
+            <span class="gs-option-name">AI Detector</span>
+            <span class="gs-option-desc">Detect AI-generated images, deepfakes, or AI-written text.</span>
+          </div>
+          <span class="gs-option-arrow">
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
+        </a>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg-glow"></div>
+    <div class="container">
+
+      <h1 id="main-headline" class="animate-slide-up delay-100">Defending Truth in the<br><span>Digital Age.</span></h1>
+      <!-- <h1 id="main-headline" class="animate-slide-up delay-100">Stop Fake News,<br><span>Instantly.</span></h1> -->
+
+      <p id="web-description" class="animate-slide-up delay-200">An AI-powered chatbot designed to combat fake news and disinformation in real time, featuring AI detection for both text and images.</p>
+      <button class="btn-primary" id="getStartedBtn">Get Started</button>
+      
+      <div class="scroll-hint" id="scrollHint">
+        <div class="scroll-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 5v14M5 12l7 7 7-7"/>
+          </svg>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about-section animate-fade-in">
+    <div class="container">
+      <div class="about-inner">
+
+        <div class="about-left">
+          <p class="section-eyebrow">What is Veritascan</p>
+          <h2 class="section-heading">AI built to fight misinformation.</h2>
+          <p>Veritascan is an AI-powered fact-checking tool that helps you verify news, articles, and images in seconds. Simply paste a URL or text and our system cross-references it against live sources to give you an honest credibility verdict, while also checking whether the content or image is AI-generated.</p>
+          <p>Built in alignment with <strong>UN Sustainable Development Goal 16</strong> — promoting access to information and protecting fundamental freedoms.</p>
+          <span class="about-tag">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
+            Aligned with UN SDG 16
+          </span>
+        </div>
+
+        <div class="about-right">
+          <div class="about-fact">
+            <span class="about-fact-label">Input types supported</span>
+            <span class="about-fact-val">Text, URL, Image, Document, Voice</span>
+          </div>
+          <div class="about-fact">
+            <span class="about-fact-label">Live sources scanned</span>
+            <span class="about-fact-val">10<span>+</span></span>
+          </div>
+          <div class="about-fact">
+            <span class="about-fact-label">Verdict types</span>
+            <span class="about-fact-val">7</span>
+          </div>
+          <div class="about-fact">
+            <span class="about-fact-label">Average scan time</span>
+            <span class="about-fact-val">2.4<span>s</span></span>
+          </div>
+          <div class="about-fact">
+            <span class="about-fact-label">Max confidence score</span>
+            <span class="about-fact-val">97<span>%</span></span>
+          </div>
+
+          <div class="about-fact">
+            <span class="about-fact-label">Trusted sources</span>
+            <span class="about-fact-val">
+              Google Fact Check, Wikipedia, NewsAPI
+              <span class="tooltip">+ 8 more
+                <span class="tooltiptext">
+                  Google Serper — Google Search results (organic + top stories + answer box)<br>
+                  GNews — Backup news source<br>
+                  DuckDuckGo Instant Answer — Direct factual answers<br>
+                  Google Knowledge Graph — Verified structured entity data<br>
+                  Wikidata — Biographical facts<br>
+                  AIOrnot API — AI detection for text & images<br>
+                  OpenRouter — LLM (Gemini 2.0 + 10 fallback models)
+                </span>
+              </span>
+            </span>
+          </div>
+
+
+
+</div>
+        </div>
+
+        </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features-section">
+    <div class="container">
+      <p class="section-eyebrow">What we offer</p>
+      <h2 class="section-heading">The full toolkit for a smarter read</h2>
+      <div class="features-grid">
+
+        <div class="feat-card">
+          <div class="feat-icon">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M8 11h6M11 8v6"/></svg>
+          </div>
+          <div class="feat-body">
+            <span class="feat-name">Fake News Detection</span>
+            <p class="feat-desc">Scan text, images, and URLs to instantly assess credibility against live sources.</p>
+          </div>
+        </div>
+
+        <div class="feat-card">
+          <div class="feat-icon">
+            <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="m9 8 3 3 3-3"/></svg>
+          </div>
+          <div class="feat-body">
+            <span class="feat-name">Media Analysis</span>
+            <p class="feat-desc">Detect AI-generated images and text with precision.</p>
+          </div>
+        </div>
+
+        <div class="feat-card">
+          <div class="feat-icon">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          </div>
+          <div class="feat-body">
+            <span class="feat-name">Credibility Report</span>
+            <p class="feat-desc">Detailed analysis with classification, risk level, and confidence score.</p>
+          </div>
+        </div>
+
+        <div class="feat-card">
+          <div class="feat-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+          </div>
+          <div class="feat-body">
+            <span class="feat-name">Explainable AI</span>
+            <p class="feat-desc">Transparent reasoning behind every verdict — no black boxes.</p>
+          </div>
+        </div>
+
+        <div class="feat-card">
+          <div class="feat-icon">
+            <svg viewBox="0 0 24 24"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v2"/><path d="M2 20h2v-4H2v4zm0-6h2v-4H2v4zm0-6h2V4H2v4z"/></svg>
+          </div>
+          <div class="feat-body">
+            <span class="feat-name">Related News</span>
+            <p class="feat-desc">Access verified and relevant reference articles from trusted sources (Google Fact Check, NewsAPI, GNews, Wikipedia, Wikidata).</p>
+          </div>
+        </div>
+
+        <div class="feat-card">
+          <div class="feat-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          </div>
+          <div class="feat-body">
+            <span class="feat-name">Tips & Guidance</span>
+            <p class="feat-desc">Learn how to spot misleading content and build media literacy.</p>
+          </div>
+        </div>
+
+        <div class="feat-card">
+          <div class="feat-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+          </div>
+          <div class="feat-body">
+            <span class="feat-name">Voice Interaction</span>
+            <p class="feat-desc">Use voice commands to interact with the chatbot hands-free.</p>
+          </div>
+        </div>
+
+        <div class="feat-card">
+          <div class="feat-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div class="feat-body">
+            <span class="feat-name">Source Verification</span>
+            <p class="feat-desc">Cross-check publisher credibility and domain trust history automatically.</p>
+          </div>
+        </div>
+
+        <div class="feat-card">
+          <div class="feat-icon">
+            <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <div class="feat-body">
+            <span class="feat-name">Real-Time Scanning</span>
+            <p class="feat-desc">Live source queries deliver up-to-date results as news breaks.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how-section">
+    <div class="container">
+      <p class="section-eyebrow">How it works</p>
+      <h2 class="section-heading">Four steps to the truth.</h2>
+      <div class="steps-list">
+        <div class="step-row">
+          <span class="step-num">01</span>
+          <div class="step-body">
+            <span class="step-name">Submit</span>
+            <span class="step-desc">
+              Paste a URL, text snippet, upload an image, or use voice input.
+            </span>
+          </div>
+        </div>
+        <div class="step-row">
+          <span class="step-num">02</span>
+          <div class="step-body">
+            <span class="step-name">Search</span>
+            <span class="step-desc">10+ live sources scanned — Google, NewsAPI, Wikipedia & more.</span>
+          </div>
+        </div>
+        <div class="step-row">
+          <span class="step-num">03</span>
+          <div class="step-body">
+            <span class="step-name">Analyze</span>
+            <span class="step-desc">AI cross-references evidence and detects manipulation signals.</span>
+          </div>
+        </div>
+        <div class="step-row">
+          <span class="step-num">04</span>
+          <div class="step-body">
+            <span class="step-name">Verdict</span>
+            <span class="step-desc">Credibility score, confidence level, and source references.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- POWERED BY -->
+  <section class="powered-section">
+    <div class="container">
+      <p class="section-eyebrow">Powered by</p>
+      <h2 class="section-heading">Built on trusted sources.</h2>
+      <div class="pill-group">
+        <span class="pill pill-primary">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
+          UN SDG 16
+        </span>
+        <span class="pill">
+          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Google Fact Check
+        </span>
+        <span class="pill">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          Google Search
+        </span>
+        <span class="pill">
+          <svg viewBox="0 0 24 24"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v2"/><path d="M2 20h2v-4H2v4zm0-6h2v-4H2v4zm0-6h2V4H2v4z"/></svg>
+          NewsAPI · GNews
+        </span>
+        <span class="pill">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          Wikipedia · Wikidata
+        </span>
+        <span class="pill">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          AI Image Detection
+        </span>
+        <span class="pill">
+          <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm0 5c1.1 0 2 .9 2 2v4h-4v-4c0-1.1.9-2 2-2z"/></svg>
+          OpenRouter AI
+        </span>
+        <span class="pill">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
+          DuckDuckGo
+        </span>
+        <span class="pill">
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          Knowledge Graph
+        </span>
+        <span class="pill">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 11V7M8 9h6"/></svg>
+          Serper Search
+        </span>
+        <span class="pill">
+        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        Gemini · DeepSeek · LLaMA · Mistral
+      </span>
+      <span class="pill">
+        <svg viewBox="0 0 24 24"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        AI Text Detection
+      </span>
+      <span class="pill">
+        <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        URL Fetcher
+      </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SAMPLE RESULT -->
+  <section class="sample-section">
+    <div class="container">
+      <p class="section-eyebrow">Sample result</p>
+      <h2 class="section-heading">See what a scan looks like.</h2>
+
+      <div class="sample-tabs">
+        <button class="sample-tab active" data-tab="fakenews">Fake News</button>
+        <button class="sample-tab" data-tab="aiimage">AI Image</button>
+        <button class="sample-tab" data-tab="aitext">AI Text</button>
+      </div>
+
+      <!-- FAKE NEWS -->
+      <div class="sample-panel active" id="tab-fakenews">
+        <div class="result-card">
+          <div class="rc-topbar">
+            <div class="rc-dots"><i></i><i></i><i></i></div>
+            <span class="rc-url">facebook.com/viral-post-dswd-2025/cash-aid-all-citizens</span>
+            <span class="rc-analyzed">Analyzed</span>
+          </div>
+          <div class="rc-verdict-row">
+            <div class="rc-left">
+              <span class="rc-verdict-tag">LIKELY FAKE</span>
+              <span class="rc-headline">BREAKING: Government to give free ₱10,000 cash aid to all citizens — DSWD</span>
+            </div>
+            <div class="rc-score-block">
+              <div class="rc-score-num">11</div>
+              <div class="rc-score-track"><div class="rc-score-fill"></div></div>
+              <div class="rc-score-lbl">Score / 100</div>
+            </div>
+          </div>
+          <div class="rc-summary">
+            No official DSWD press release or government record confirms this program. The claim provides no budget source, implementing guidelines, or application process — hallmark signs of a fabricated government aid post.
+          </div>
+          <div class="rc-confidence">
+            <span class="rc-conf-label">Confidence</span>
+            <div class="rc-conf-track"><div class="rc-conf-fill" style="width:87%"></div></div>
+            <span class="rc-conf-pct">87.0%</span>
+          </div>
+          <div class="rc-flags">
+            <span class="rc-flag">No official source</span>
+            <span class="rc-flag">No budget cited</span>
+            <span class="rc-flag">Vague eligibility</span>
+            <span class="rc-flag">Viral bait language</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI IMAGE -->
+      <div class="sample-panel" id="tab-aiimage">
+        <div class="result-card">
+          <div class="rc-topbar">
+            <div class="rc-dots"><i></i><i></i><i></i></div>
+            <span class="rc-url">uploaded_image — calamity_relief_photo.jpg</span>
+            <span class="rc-analyzed">Analyzed</span>
+          </div>
+          <div class="rc-verdict-row">
+            <div class="rc-left">
+              <span class="rc-verdict-tag rc-verdict-tag--ai">AI GENERATED</span>
+              <span class="rc-headline">Flood relief operation photo circulating on social media</span>
+            </div>
+            <div class="rc-score-block">
+              <div class="rc-score-num" style="color: var(--warning);">91</div>
+              <div class="rc-score-track"><div class="rc-score-fill" style="width:91%; background: var(--warning);"></div></div>
+              <div class="rc-score-lbl">AI Score / 100</div>
+            </div>
+          </div>
+          <div class="rc-summary">
+            Image shows strong indicators of AI generation — unnatural lighting consistency, distorted background details, and facial anomalies typical of diffusion model outputs. No matching original found in reverse image search.
+          </div>
+          <div class="rc-confidence">
+            <span class="rc-conf-label">Confidence</span>
+            <div class="rc-conf-track"><div class="rc-conf-fill" style="width:91%; background: linear-gradient(to right, var(--warning), #f97316);"></div></div>
+            <span class="rc-conf-pct">91.0%</span>
+          </div>
+          <div class="rc-flags">
+            <span class="rc-flag rc-flag--ai">Diffusion model artifacts</span>
+            <span class="rc-flag rc-flag--ai">Unnatural lighting</span>
+            <span class="rc-flag rc-flag--ai">Facial distortion</span>
+            <span class="rc-flag rc-flag--ai">No original found</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI TEXT -->
+      <div class="sample-panel" id="tab-aitext">
+        <div class="result-card">
+          <div class="rc-topbar">
+            <div class="rc-dots"><i></i><i></i><i></i></div>
+            <span class="rc-url">pasted text — opinion_article_excerpt.txt</span>
+            <span class="rc-analyzed">Analyzed</span>
+          </div>
+          <div class="rc-verdict-row">
+            <div class="rc-left">
+              <span class="rc-verdict-tag rc-verdict-tag--ai">AI WRITTEN</span>
+              <span class="rc-headline">Opinion piece claiming to be written by a local journalist</span>
+            </div>
+            <div class="rc-score-block">
+              <div class="rc-score-num" style="color: var(--warning);">88</div>
+              <div class="rc-score-track"><div class="rc-score-fill" style="width:88%; background: var(--warning);"></div></div>
+              <div class="rc-score-lbl">AI Score / 100</div>
+            </div>
+          </div>
+          <div class="rc-summary">
+            Text exhibits high probability of AI authorship — overly uniform sentence structure, absence of personal voice, and statistically predictable phrasing patterns consistent with large language model outputs.
+          </div>
+          <div class="rc-confidence">
+            <span class="rc-conf-label">Confidence</span>
+            <div class="rc-conf-track"><div class="rc-conf-fill" style="width:88%; background: linear-gradient(to right, var(--warning), #f97316);"></div></div>
+            <span class="rc-conf-pct">88.0%</span>
+          </div>
+          <div class="rc-flags">
+            <span class="rc-flag rc-flag--ai">Uniform sentence rhythm</span>
+            <span class="rc-flag rc-flag--ai">No personal voice</span>
+            <span class="rc-flag rc-flag--ai">LLM phrasing patterns</span>
+            <span class="rc-flag rc-flag--ai">Low lexical diversity</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-logo"></div>
+          <p class="footer-tagline">Veritas semper vincit mendacium.</p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-col">
+            <span class="footer-col-label">Links</span>
+            <ul>
+              <li><a href="../html/chatbot.html">Verify News</a></li>
+              <li><a href="../html/imageDetector.html">AI Detector</a></li>
+              <li><a href="../html/docs.html">Docs</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <span class="footer-col-label">Sources</span>
+            <ul>
+              <li><a href="https://newsapi.org" target="_blank" rel="noopener">NewsAPI</a></li>
+              <li><a href="https://gnews.io" target="_blank" rel="noopener">GNews</a></li>
+              <li><a href="https://wikipedia.org" target="_blank" rel="noopener">Wikipedia</a></li>
+              <li><a href="https://wikidata.org" target="_blank" rel="noopener">Wikidata</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <span class="footer-col-label">cross-check</span>
+            <ul>
+              <li><a href="https://factcheck.afp.com" target="_blank" rel="noopener">AFP Fact Check</a></li>
+              <li><a href="https://snopes.com" target="_blank" rel="noopener">Snopes</a></li>
+              <li><a href="https://news.google.com" target="_blank" rel="noopener">Cross-Check Sources</a></li>
+              <li><a href="https://toolbox.google.com/factcheck" target="_blank" rel="noopener">Google Fact Check</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-divider"></div>
+      <div class="footer-bottom">
+        <span class="footer-copy">&copy; 2026 Veritascan. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+</main>
+
+<script src="../scripts/script.js"></script>
+
+</body>
+</html>

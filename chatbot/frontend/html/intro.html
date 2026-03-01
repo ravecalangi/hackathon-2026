@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Veritascan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+  <script>
+    (function () {
+      const theme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #f8fafc;
+      --ink: #0f172a;
+      --primary: #0891b2;
+      --border: #e2e8f0;
+    }
+
+    [data-theme="dark"] {
+      --bg: #020617;
+      --ink: #f8fafc;
+      --primary: #22d3ee;
+      --border: #1e293b;
+    }
+
+    html, body {
+      width: 100%; height: 100%;
+    }
+
+    body {
+      background: var(--bg);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      font-family: 'Instrument Sans', sans-serif;
+    }
+
+    /* Scanner icon */
+    .icon {
+      position: relative;
+      width: 40px;
+      height: 40px;
+      opacity: 0;
+      animation: up 0.8s ease 0.1s forwards;
+    }
+
+    .c {
+      position: absolute;
+      width: 11px;
+      height: 11px;
+      border-color: var(--ink);
+      border-style: solid;
+    }
+    .c.tl { top: 0; left: 0; border-width: 1px 0 0 1px; }
+    .c.tr { top: 0; right: 0; border-width: 1px 1px 0 0; }
+    .c.bl { bottom: 0; left: 0; border-width: 0 0 1px 1px; }
+    .c.br { bottom: 0; right: 0; border-width: 0 1px 1px 0; }
+
+    .beam {
+      position: absolute;
+      left: 0; right: 0;
+      height: 1.5px;
+      background: linear-gradient(90deg, transparent, var(--primary), transparent);
+      box-shadow: 0 0 8px rgba(34, 211, 238, 0.4);
+      opacity: 0;
+      animation: beamMove 2s ease-in-out infinite;
+    }
+
+    .ring {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 40px; height: 40px;
+      border: 1px solid var(--primary);
+      border-radius: 50%;
+      opacity: 0;
+    }
+    .ring:nth-child(1) { animation: ringOut 3s ease 2.2s infinite; }
+    .ring:nth-child(2) { animation: ringOut 3s ease 2.7s infinite; }
+
+    /* Bar */
+    .bar {
+      width: 72px;
+      height: 1px;
+      background: var(--border);
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      animation: up 0.8s ease 0.4s forwards;
+    }
+
+    .bar::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--ink), var(--primary));
+      animation: load 2.6s cubic-bezier(0.4, 0, 0.2, 1) 0.8s forwards;
+    }
+
+    @keyframes up {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes beamMove {
+      0%   { top: 0; opacity: 0; }
+      10%  { opacity: 1; }
+      90%  { opacity: 1; }
+      100% { top: 100%; opacity: 0; }
+    }
+
+    @keyframes ringOut {
+      0%   { transform: translate(-50%, -50%) scale(0.5); opacity: 0.4; }
+      100% { transform: translate(-50%, -50%) scale(2.4); opacity: 0; }
+    }
+
+    @keyframes load {
+      0%   { width: 0%; }
+      60%  { width: 68%; }
+      85%  { width: 87%; }
+      100% { width: 100%; }
+    }
+
+    body.done { animation: out 0.8s ease forwards; }
+    @keyframes out { to { opacity: 0; } }
+  </style>
+</head>
+<body id="body">
+
+  <div class="icon">
+    <div class="ring"></div>
+    <div class="ring"></div>
+    <div class="c tl"></div>
+    <div class="c tr"></div>
+    <div class="c bl"></div>
+    <div class="c br"></div>
+    <div class="beam"></div>
+  </div>
+
+  <div class="bar"></div>
+
+  <script>
+    setTimeout(() => {
+      document.getElementById('body').classList.add('done');
+      setTimeout(() => { window.location.href = 'index.html'; }, 800);
+    }, 4000);
+  </script>
+
+</body>
+</html>
