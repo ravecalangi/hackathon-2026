@@ -95,5 +95,9 @@ chatbot/
 └── img/
 ```
 
+# Live Demo
+
+🔗 [Visit Veritascan](https://veritascan.netlify.app/html/index.html)
+
 ## License
 MIT License
