@@ -1,4 +1,4 @@
-# Veritascan – AI Fake News Detection System
+# Veritascan - AI-Powered Chatbot for Fake News Verification with AI-Generated Content Detection
 
 ## Description
 Veritascan is an AI-powered fake news detection and media verification platform designed to identify misinformation in real time. The system analyzes text, URLs, images, and media content using AI and trusted live sources to provide credibility reports and fact-checking results.
